@@ -1,9 +1,12 @@
-name: Run github_issues_merge pipeline from github_pipeline.py
+name: Run jaffle_shop_pipeline pipeline from jaffle_shop_pipeline.py
 'on':
   schedule:
   - cron: '*/30 * * * *'
   workflow_dispatch: null
-env: {}
+env:
+  EXTRACT__WORKERS: '50'
+  NORMALIZE__WORKERS: '20'
+  LOAD__WORKERS: '20'
 jobs:
   maybe_skip:
     runs-on: ubuntu-latest
@@ -36,4 +39,4 @@ jobs:
     - run: pip install -r requirements_github_action.txt
       if: steps.cache-virtualenv.outputs.cache-hit != 'true'
     - name: Run pipeline script
-      run: python 'github_pipeline.py'
+      run: python 'jaffle_shop_pipeline.py'
