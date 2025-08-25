@@ -1,8 +1,11 @@
 name: Run jaffle_shop_pipeline pipeline from jaffle_shop_pipeline.py
 'on':
-  schedule:
-  - cron: '*/30 * * * *'
-  workflow_dispatch: null
+  # Disable chron job while waiting for review
+  # schedule:
+  # - cron: '*/30 * * * *'
+  # workflow_dispatch: null
+  push:
+    branches: [main]
 env:
   EXTRACT__WORKERS: '50'
   NORMALIZE__WORKERS: '20'
